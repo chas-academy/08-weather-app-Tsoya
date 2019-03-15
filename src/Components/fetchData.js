@@ -17,15 +17,19 @@ class Fetch extends Component {
       componentDidMount() {
 
         navigator.geolocation.getCurrentPosition((position) => {
-        console.log(position.coords.latitude, position.coords.longitude);
+        // console.log(position.coords.latitude, position.coords.longitude);
 
-            Api();
+        const lat = position.coords.latitude;
+        const long = position.coords.longitude;    
 
+        console.log(lat, long)
+
+        Api();
 
 
         async function Api() {
             const apiKey = '7cb29df97dd4e2a6850670bf6dc173b6';
-            const Baseurl = 'https://cors-anywhere.herokuapp.com/https://api.darksky.net/forecast/'+ apiKey+ '/37.8267,-122.4233';
+            const Baseurl = 'https://cors-anywhere.herokuapp.com/https://api.darksky.net/forecast/'+ apiKey+ '/' + lat + ',' + long;
             const response = await fetch(Baseurl);
             const data = await response.json();
             console.log(data);
