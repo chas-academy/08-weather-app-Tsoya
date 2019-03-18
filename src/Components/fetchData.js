@@ -12,10 +12,14 @@ class Fetch extends Component {
             sunrise: ''
         }
 
-        this.onClick = this.onClick.bind(this); 
+        this.onClick = this.onClick.bind(this);
     }
 
     componentDidMount() {
+
+        let talal;
+
+        console.log(talal)
 
         navigator.geolocation.getCurrentPosition((position) => {
             // console.log(position.coords.latitude, position.coords.longitude);
@@ -37,13 +41,21 @@ class Fetch extends Component {
                         timezone: res.timezone,
                         sunrise: res.daily.data[0].sunriseTime
                     })
+                    let talal = new Date(this.state.sunrise * 1000)
                     console.log(this.state.timezone)
+                    console.log(talal)
+                    // FIX DATE FOR SUNRISE AND SUNSET
                 })
         })
+
+        
     }
 
     onClick() {
-        console.log(this);
+
+        // let date = new Date(1552885043 * 1000)
+        // console.log(date);
+
     }
 
     render() {
@@ -54,7 +66,7 @@ class Fetch extends Component {
                 <p>Temperature: {this.state.items.temperature}</p>
                 <p>Wind Speed: {this.state.items.windSpeed}</p>
                 <p>Wind Gust: {this.state.items.windGust}</p>
-                <p>Sunrise {this.state.sunrise} </p>
+                <p>Sunrise {this.talal} </p>
             </div>
         )
     }
