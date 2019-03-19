@@ -10,10 +10,13 @@ class Fetch extends Component {
             isLoaded: false,
             error: null,
             sunrise: '',
-            sunset: ''
+            sunset: '',
+            temperature: '',
+            isFar: true,
         }
 
         this.onClick = this.onClick.bind(this);
+        this.onClick1 = this.onClick1.bind(this);
     }
 
     componentDidMount() {
@@ -23,10 +26,6 @@ class Fetch extends Component {
             const lat = position.coords.latitude;
             const long = position.coords.longitude;
 
-            console.log(lat, long)
-            this.setState({
-                isLoaded: true
-            })
 
 
             fetch('https://cors.io/?https://api.darksky.net/forecast/7cb29df97dd4e2a6850670bf6dc173b6/' + lat + ',' + long)
@@ -37,13 +36,15 @@ class Fetch extends Component {
                         items: res.currently,
                         timezone: res.timezone,
                         sunrise: new Date(res.daily.data[0].sunriseTime * 1000),
-                        sunset: new Date(res.daily.data[0].sunsetTime * 1000) 
+                        sunset: new Date(res.daily.data[0].sunsetTime * 1000),
+                        isLoaded: true,
+                        temperature: res.currently.temperature,
                     })
                     // dateSunrise.toISOISOString();
                     console.log();
                     // FIX DATE FOR SUNRISE AND SUNSET
                 })
-                
+
 
 
         })
@@ -53,22 +54,48 @@ class Fetch extends Component {
 
     onClick() {
 
-        // let date = new Date(1552885043 * 1000)
-        // console.log(date);
+        this.setState({
+            isFar: false
+        })
 
+    }
+
+    onClick1() {
+        this.setState({
+            isFar: true
+        })
     }
 
     render() {
         return (
 
-            <div>
-                <h2>Weather for: {this.state.timezone}</h2>
-                <p>Temperature: {this.state.items.temperature}</p>
-                <p>Wind Speed: {this.state.items.windSpeed}</p>
-                <p>Wind Gust: {this.state.items.windGust}</p>
-                <p>Sunrise: {this.state.sunrise.toString()} </p>
-                <p>Sunset: {this.state.sunset.toString()} </p>
-            </div>
+            (this.state.isLoaded) ? (
+                <div>
+                    <h2>Weather for: {this.state.timezone}</h2>
+                    <button onClick={this.onClick}>Celcius</button>
+                    <button onClick={this.onClick1}>Farenheit</button>
+                    <h3>Todays weather</h3>
+
+                    {(this.state.isFar) ? (
+                        <p>Temperature: {this.state.temperature} Farenheit</p>
+                    ) : (
+                        <p>Temperature: {Math.round((this.state.temperature) - 32 * 5 / 9)} Celcius</p>
+                    )}
+
+
+                    <p>Wind Speed: {this.state.items.windSpeed} MPH</p>
+                    <p>Wind Gust: {this.state.items.windGust} MPH</p>
+                    <p>Sunrise: {this.state.sunrise.toString()} </p>
+                    <p>Sunset: {this.state.sunset.toString()} </p>
+                </div>
+
+
+            ) : (
+                <div>
+                    <p>hej</p>
+                </div>
+            )
+
         )
     }
 }
