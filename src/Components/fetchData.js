@@ -13,6 +13,7 @@ class Fetch extends Component {
             sunset: '',
             temperature: '',
             isFar: true,
+            tempforweek: ''
         }
 
         this.onClick = this.onClick.bind(this);
@@ -39,21 +40,19 @@ class Fetch extends Component {
                         sunset: new Date(res.daily.data[0].sunsetTime * 1000),
                         isLoaded: true,
                         temperature: res.currently.temperature,
+                        tempforweek: res.daily.data
+
                     })
                     // dateSunrise.toISOISOString();
-                    console.log();
+                    console.log(this.state.tempforweek);
                     // FIX DATE FOR SUNRISE AND SUNSET
                 })
-
-
-
         })
 
 
     }
 
     onClick() {
-
         this.setState({
             isFar: false
         })
@@ -71,30 +70,103 @@ class Fetch extends Component {
 
             (this.state.isLoaded) ? (
                 <div>
-                    <h2>Weather for: {this.state.timezone}</h2>
-                    <button onClick={this.onClick}>Celcius</button>
-                    <button onClick={this.onClick1}>Farenheit</button>
-                    <h3>Todays weather</h3>
+                    <div className="todaysWeather">
+                        <h2>Weather for: {this.state.timezone}</h2>
+                        <button onClick={this.onClick}>Celcius</button>
+                        <button onClick={this.onClick1}>Farenheit</button>
+                        <h3>Todays weather</h3>
 
-                    {(this.state.isFar) ? (
-                        <p>Temperature: {this.state.temperature} Farenheit</p>
-                    ) : (
-                        <p>Temperature: {Math.round((this.state.temperature) - 32 * 5 / 9)} Celcius</p>
-                    )}
+                        {(this.state.isFar) ? (
+                            <p>Temperature: {this.state.temperature} Farenheit</p>
+                        ) : (
+                                <p>Temperature: {Math.round((this.state.temperature) - 32 * 5 / 9)} Celcius</p>
+                            )}
 
 
-                    <p>Wind Speed: {this.state.items.windSpeed} MPH</p>
-                    <p>Wind Gust: {this.state.items.windGust} MPH</p>
-                    <p>Sunrise: {this.state.sunrise.toString()} </p>
-                    <p>Sunset: {this.state.sunset.toString()} </p>
+                        <p>Wind Speed: {this.state.items.windSpeed} MPH</p>
+                        <p>Wind Gust: {this.state.items.windGust} MPH</p>
+                        <p>Sunrise: {this.state.sunrise.toString()} </p>
+                        <p>Sunset: {this.state.sunset.toString()} </p>
+
+                    </div>
+
+                    <hr />
+
+                    <div className="weekoverview">
+
+                        <div className="overview">
+                            <h2>Weather for {new Date(this.state.tempforweek[1].time * 1000).toString()} </h2>
+                            <h3>Short overview</h3>
+                            <p>{this.state.tempforweek[1].summary} </p>
+
+                            {(this.state.isFar) ? (
+                                <p>Temperature: {this.state.tempforweek[1].temperatureHigh} Farenheit</p>
+                            ) : (
+                                    <p>Temperature: {Math.round((this.state.tempforweek[1].temperatureHigh) - 32 * 5 / 9)} Celcius</p>
+                                )}
+                        </div>
+
+                        <div className="overview">
+                            <h2>Weather for {new Date(this.state.tempforweek[2].time * 1000).toString()} </h2>
+                            <h3>Short overview</h3>
+                            <p>{this.state.tempforweek[1].summary} </p>
+
+                            {(this.state.isFar) ? (
+                                <p>Temperature: {this.state.tempforweek[1].temperatureHigh} Farenheit</p>
+                            ) : (
+                                    <p>Temperature: {Math.round((this.state.tempforweek[2].temperatureHigh) - 32 * 5 / 9)} Celcius</p>
+                                )}
+                        </div>
+
+                        <div className="overview">
+                            <h2>Weather for {new Date(this.state.tempforweek[3].time * 1000).toString()} </h2>
+                            <h3>Short overview</h3>
+                            <p>{this.state.tempforweek[1].summary} </p>
+
+                            {(this.state.isFar) ? (
+                                <p>Temperature: {this.state.tempforweek[1].temperatureHigh} Farenheit</p>
+                            ) : (
+                                    <p>Temperature: {Math.round((this.state.tempforweek[3].temperatureHigh) - 32 * 5 / 9)} Celcius</p>
+                                )}
+                        </div>
+
+                        <div className="overview">
+                            <h2>Weather for {new Date(this.state.tempforweek[4].time * 1000).toString()} </h2>
+                            <h3>Short overview</h3>
+                            <p>{this.state.tempforweek[1].summary} </p>
+
+                            {(this.state.isFar) ? (
+                                <p>Temperature: {this.state.tempforweek[1].temperatureHigh} Farenheit</p>
+                            ) : (
+                                    <p>Temperature: {Math.round((this.state.tempforweek[4].temperatureHigh) - 32 * 5 / 9)} Celcius</p>
+                                )}
+                        </div>
+
+                        <div className="overview">
+                            <h2>Weather for {new Date(this.state.tempforweek[5].time * 1000).toString()} </h2>
+                            <h3>Short overview</h3>
+                            <p>{this.state.tempforweek[1].summary} </p>
+
+                            {(this.state.isFar) ? (
+                                <p>Temperature: {this.state.tempforweek[1].temperatureHigh} Farenheit</p>
+                            ) : (
+                                    <p>Temperature: {Math.round((this.state.tempforweek[5].temperatureHigh) - 32 * 5 / 9)} Celcius</p>
+                                )}
+                        </div>
+
+                    </div>
+
+
+
+
                 </div>
 
 
             ) : (
-                <div>
-                    <p>hej</p>
-                </div>
-            )
+                    <div>
+                        <p>hej</p>
+                    </div>
+                )
 
         )
     }
@@ -104,24 +176,3 @@ class Fetch extends Component {
 
 export default Fetch;
 
-
-
-
-        // async function Api() {
-        //     const apiKey = '7cb29df97dd4e2a6850670bf6dc173b6';
-        //     const Baseurl = 'https://cors.io/?https://api.darksky.net/forecast/'+ apiKey+ '/' + lat + ',' + long;
-
-        //     fetch(Baseurl)
-        //     .then(res => res.json())
-        //     .then(res => {
-        //         console.log(this);
-        //         this.setState({
-        //             items: res.currently
-        //         })
-        //        console.log(res); 
-
-        //     });
-
-        //     }
-
-        //     Api(); 
