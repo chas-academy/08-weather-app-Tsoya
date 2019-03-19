@@ -24,7 +24,6 @@ class Fetch extends Component {
     componentDidMount() {
 
         navigator.geolocation.getCurrentPosition((position) => {
-            // console.log(position.coords.latitude, position.coords.longitude);
             const lat = position.coords.latitude;
             const long = position.coords.longitude;
             console.log(position)
@@ -45,10 +44,7 @@ class Fetch extends Component {
                         isFar: true
 
                     })
-                    
-                    // dateSunrise.toISOISOString();
-                    console.log(this.state.tempforweek);
-                    // FIX DATE FOR SUNRISE AND SUNSET
+
                 })
         })
 
@@ -93,14 +89,13 @@ class Fetch extends Component {
 
                     </div>
 
-                    <hr />
 
                         
 
                     <div className="weekoverview">
 
                         <div className="overview">
-                            <h2>Weather for {new Date(this.state.tempforweek[1].time * 1000).toString()} </h2>
+                            <h2>{new Date(this.state.tempforweek[1].time * 1000).toString()} </h2>
                             <h3>Short overview</h3>
                             <p>{this.state.tempforweek[1].summary} </p>
 
@@ -112,7 +107,7 @@ class Fetch extends Component {
                         </div>
 
                         <div className="overview">
-                            <h2>Weather for {new Date(this.state.tempforweek[2].time * 1000).toString()} </h2>
+                            <h2>{new Date(this.state.tempforweek[2].time * 1000).toString()} </h2>
                             <h3>Short overview</h3>
                             <p>{this.state.tempforweek[2].summary} </p>
 
@@ -124,7 +119,7 @@ class Fetch extends Component {
                         </div>
 
                         <div className="overview">
-                            <h2>Weather for {new Date(this.state.tempforweek[3].time * 1000).toString()} </h2>
+                            <h2>{new Date(this.state.tempforweek[3].time * 1000).toString()} </h2>
                             <h3>Short overview</h3>
                             <p>{this.state.tempforweek[3].summary} </p>
 
@@ -136,7 +131,7 @@ class Fetch extends Component {
                         </div>
 
                         <div className="overview">
-                            <h2>Weather for {new Date(this.state.tempforweek[4].time * 1000).toString()} </h2>
+                            <h2>{new Date(this.state.tempforweek[4].time * 1000).toString()} </h2>
                             <h3>Short overview</h3>
                             <p>{this.state.tempforweek[4].summary} </p>
 
@@ -148,7 +143,7 @@ class Fetch extends Component {
                         </div>
 
                         <div className="overview">
-                            <h2>Weather for {new Date(this.state.tempforweek[5].time * 1000).toString()} </h2>
+                            <h2>{new Date(this.state.tempforweek[5].time * 1000).toString()} </h2>
                             <h3>Short overview</h3>
                             <p>{this.state.tempforweek[5].summary} </p>
 
@@ -161,15 +156,12 @@ class Fetch extends Component {
 
                     </div>
 
-
-
-
                 </div>
 
 
             ) : (
-                    <div>
-                        <p>hej</p>
+                    <div className="loading">
+                        <p>Loading weather for your location ...</p>
                     </div>
                 )
 
