@@ -9,17 +9,14 @@ class Fetch extends Component {
             timezone: '',
             isLoaded: false,
             error: null,
-            sunrise: ''
+            sunrise: '',
+            sunset: ''
         }
 
         this.onClick = this.onClick.bind(this);
     }
 
     componentDidMount() {
-
-        let talal;
-
-        console.log(talal)
 
         navigator.geolocation.getCurrentPosition((position) => {
             // console.log(position.coords.latitude, position.coords.longitude);
@@ -39,16 +36,19 @@ class Fetch extends Component {
                     this.setState({
                         items: res.currently,
                         timezone: res.timezone,
-                        sunrise: res.daily.data[0].sunriseTime
+                        sunrise: new Date(res.daily.data[0].sunriseTime * 1000),
+                        sunset: new Date(res.daily.data[0].sunsetTime * 1000) 
                     })
-                    let talal = new Date(this.state.sunrise * 1000)
-                    console.log(this.state.timezone)
-                    console.log(talal)
+                    // dateSunrise.toISOISOString();
+                    console.log();
                     // FIX DATE FOR SUNRISE AND SUNSET
                 })
+                
+
+
         })
 
-        
+
     }
 
     onClick() {
@@ -62,11 +62,12 @@ class Fetch extends Component {
         return (
 
             <div>
-                <h2 onClick={this.onClick} >You are in {this.state.timezone}</h2>
+                <h2>Weather for: {this.state.timezone}</h2>
                 <p>Temperature: {this.state.items.temperature}</p>
                 <p>Wind Speed: {this.state.items.windSpeed}</p>
                 <p>Wind Gust: {this.state.items.windGust}</p>
-                <p>Sunrise {this.talal} </p>
+                <p>Sunrise: {this.state.sunrise.toString()} </p>
+                <p>Sunset: {this.state.sunset.toString()} </p>
             </div>
         )
     }
