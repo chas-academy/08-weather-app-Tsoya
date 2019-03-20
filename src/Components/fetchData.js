@@ -64,7 +64,30 @@ class Fetch extends Component {
         })
     }
 
+    createWeekOverview() {
+        let allWeeks = []
+        for (let i = 1; i < 6; i++) {
+        
+            allWeeks.push (
+            <div className="overview" key={i}>
+                <h2>{new Date(this.state.tempforweek[i].time * 1000).toString()} </h2>
+                <h3>Short overview</h3>
+                <p>{this.state.tempforweek[i].summary} </p>
+
+                {(this.state.isFar) ? (
+                    <p>Temperature: {this.state.tempforweek[i].temperatureLow} Farenheit</p>
+                ) : (
+                        <p>Temperature: {Math.floor((this.state.tempforweek[i].temperatureLow - 32) / 1.8)} Celcius</p>
+                    )}
+            </div>
+            )
+        }
+        return allWeeks;
+    }
+
     render() {
+
+
         return (
 
             (this.state.isLoaded) ? (
@@ -78,7 +101,7 @@ class Fetch extends Component {
                         {(this.state.isFar) ? (
                             <p>Temperature: {this.state.temperature} Farenheit</p>
                         ) : (
-                                <p>Temperature: {Math.floor((this.state.temperature -32) / 1.8)} Celcius</p>
+                                <p>Temperature: {Math.floor((this.state.temperature - 32) / 1.8)} Celcius</p>
                             )}
 
 
@@ -90,69 +113,12 @@ class Fetch extends Component {
                     </div>
 
 
-                        
+
 
                     <div className="weekoverview">
 
-                        <div className="overview">
-                            <h2>{new Date(this.state.tempforweek[1].time * 1000).toString()} </h2>
-                            <h3>Short overview</h3>
-                            <p>{this.state.tempforweek[1].summary} </p>
+                        {this.createWeekOverview()}
 
-                            {(this.state.isFar) ? (
-                                <p>Temperature: {this.state.tempforweek[1].temperatureLow} Farenheit</p>
-                            ) : (
-                                    <p>Temperature: {Math.floor((this.state.tempforweek[1].temperatureLow -32) / 1.8)} Celcius</p>
-                                )}
-                        </div>
-
-                        <div className="overview">
-                            <h2>{new Date(this.state.tempforweek[2].time * 1000).toString()} </h2>
-                            <h3>Short overview</h3>
-                            <p>{this.state.tempforweek[2].summary} </p>
-
-                            {(this.state.isFar) ? (
-                                <p>Temperature: {this.state.tempforweek[2].temperatureLow} Farenheit</p>
-                            ) : (
-                                    <p>Temperature: {Math.floor((this.state.tempforweek[2].temperatureLow -32) / 1.8)} Celcius</p>
-                                )}
-                        </div>
-
-                        <div className="overview">
-                            <h2>{new Date(this.state.tempforweek[3].time * 1000).toString()} </h2>
-                            <h3>Short overview</h3>
-                            <p>{this.state.tempforweek[3].summary} </p>
-
-                            {(this.state.isFar) ? (
-                                <p>Temperature: {this.state.tempforweek[3].temperatureLow} Farenheit</p>
-                            ) : (
-                                    <p>Temperature: {Math.floor((this.state.tempforweek[3].temperatureLow -32) / 1.8)} Celcius</p>
-                                )}
-                        </div>
-
-                        <div className="overview">
-                            <h2>{new Date(this.state.tempforweek[4].time * 1000).toString()} </h2>
-                            <h3>Short overview</h3>
-                            <p>{this.state.tempforweek[4].summary} </p>
-
-                            {(this.state.isFar) ? (
-                                <p>Temperature: {this.state.tempforweek[4].temperatureLow} Farenheit</p>
-                            ) : (
-                                    <p>Temperature: {Math.floor((this.state.tempforweek[4].temperatureLow -32) / 1.8)} Celcius</p>
-                                )}
-                        </div>
-
-                        <div className="overview">
-                            <h2>{new Date(this.state.tempforweek[5].time * 1000).toString()} </h2>
-                            <h3>Short overview</h3>
-                            <p>{this.state.tempforweek[5].summary} </p>
-
-                            {(this.state.isFar) ? (
-                                <p>Temperature: {this.state.tempforweek[5].temperatureLow} Farenheit</p>
-                            ) : (
-                                    <p>Temperature: {Math.floor((this.state.tempforweek[5].temperatureLow -32) / 1.8)} Celcius</p>
-                                )}
-                        </div>
 
                     </div>
 
