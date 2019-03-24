@@ -1,4 +1,4 @@
-Deployed version https://weather-app.viktorts97.now.sh/ 
+Deployed version https://weather-app-3z903xeur.now.sh/
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
